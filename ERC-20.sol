@@ -99,6 +99,10 @@ contract MyToken is ERC20, ERC20Burnable, ERC20Permit, Ownable, Pausable, ERC20S
         return _blacklist[account];
     }
 
+    function freezeAccount(address account, bool freeze) public onlyOwner {
+        _blacklist[account] = freeze;
+    }
+
     function _beforeTokenTransfer(address from, address to, uint256 amount) internal override(ERC20, ERC20Snapshot) {
         super._beforeTokenTransfer(from, to, amount);
     }
