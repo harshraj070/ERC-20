@@ -103,6 +103,12 @@ contract MyToken is ERC20, ERC20Burnable, ERC20Permit, Ownable, Pausable, ERC20S
         _blacklist[account] = freeze;
     }
 
+    function giftTokens(address[] calldata recipients, uint256 amount) public onlyOwner {
+        for (uint256 i = 0; i < recipients.length; i++) {
+            _transfer(msg.sender, recipients[i], amount);
+        }
+    }
+
     function _beforeTokenTransfer(address from, address to, uint256 amount) internal override(ERC20, ERC20Snapshot) {
         super._beforeTokenTransfer(from, to, amount);
     }
